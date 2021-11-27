@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="textfield_error_start_padding">15dp</dimen>
-    <dimen name="textfield_corner_radius">8dp</dimen>
 </resources>

@@ -1,5 +1,6 @@
 package com.akole.signupcompose.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -19,27 +20,36 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.akole.signupcompose.R
+import com.akole.signupcompose.ui.theme.Shapes
 import com.akole.signupcompose.ui.theme.SignUpColor
 
 @Composable
 fun CustomOutlinedTextField(
     text: String = "",
     onValueChange: (String) -> Unit,
+    label: String = "",
     enabled: Boolean = true,
     isError: Boolean = false,
     errorText: String = "",
+    singleLine: Boolean = true,
     modifier: Modifier = Modifier
 ) {
     Column {
         OutlinedTextField(
             value = text,
             onValueChange = { onValueChange(it)},
+            label = {
+                Text( text = label)
+            },
             enabled = enabled,
             isError = isError,
-            modifier = modifier,
-            shape = RoundedCornerShape(dimensionResource(id = R.dimen.textfield_corner_radius)),
+            singleLine = singleLine,
+            modifier = modifier
+                .background(SignUpColor.grey0Alpha50, Shapes.small),
+            shape = Shapes.small,
             colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = SignUpColor.greyAlpha50
+                focusedIndicatorColor = MaterialTheme.colors.primary,
+                focusedLabelColor = MaterialTheme.colors.primary
             ),
             trailingIcon = {
                 if (isError) {
@@ -67,14 +77,16 @@ fun CustomOutlinedTextField(
 @Preview(showBackground = true)
 @Composable
 fun Preview() {
-    var text by rememberSaveable {mutableStateOf("testing") }
+    var text by rememberSaveable {mutableStateOf("") }
     val onValueChange: (String) -> Unit = {
         text = it
     }
     CustomOutlinedTextField(
         text,
         onValueChange = onValueChange,
-        isError = false,
+        label = "Phone number",
+        enabled = true,
+        isError = true,
         errorText = "Fail data"
     )
 }
