@@ -1,16 +1,16 @@
 package com.akole.signupcompose.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -52,11 +52,13 @@ fun CustomOutlinedTextField(
                 focusedLabelColor = MaterialTheme.colors.primary
             ),
             trailingIcon = {
-                if (isError) {
+                if (text.isNotEmpty()) {
                     Icon(
-                        imageVector = Icons.Filled.Warning,
-                        tint = MaterialTheme.colors.error,
-                        contentDescription = "Text validation error"
+                        imageVector = Icons.Filled.Close,
+                        contentDescription = "Clear text icon",
+                        tint = SignUpColor.greyDarkAlpha50,
+                        modifier = Modifier
+                            .clickable { onValueChange("") }
                     )
                 }
             }
@@ -77,7 +79,7 @@ fun CustomOutlinedTextField(
 @Preview(showBackground = true)
 @Composable
 fun Preview() {
-    var text by rememberSaveable {mutableStateOf("") }
+    var text by rememberSaveable { mutableStateOf("") }
     val onValueChange: (String) -> Unit = {
         text = it
     }
