@@ -25,7 +25,10 @@ class SignUpViewModel: ViewModel() {
             is ViewEvent.LastNameChange -> updateState(lastName = value)
             is ViewEvent.PhoneNumberChange -> updateState(phoneNumber = value)
             is ViewEvent.CountryChange -> onCountryChange(country = value)
+            is ViewEvent.EmailChange -> updateState(email = value)
+            is ViewEvent.PasswordChange -> updateState(password = value)
             is ViewEvent.BirthdateChange -> updateState(birthdate = value)
+            ViewEvent.PasswordSwitchClick -> updateState(isPasswordVisible = !viewState.isPasswordVisible)
             ViewEvent.CountryClick -> onCountryClick()
             ViewEvent.SignUpButtonClick -> emit(OneShotEvent.SignUpCompleted(viewState.toUser()))
             ViewEvent.OnKeyboardDone -> emit(OneShotEvent.HideKeyboard)
@@ -40,6 +43,9 @@ class SignUpViewModel: ViewModel() {
         phoneNumber: String = viewState.phoneNumber,
         country: String = viewState.country,
         birthdate: String = viewState.birthdate,
+        email: String = viewState.email,
+        password: String = viewState.password,
+        isPasswordVisible: Boolean = viewState.isPasswordVisible,
         isSignUpButtonEnabled: Boolean = viewState.isSignUpButtonEnabled
     ) {
         viewState = ViewState(
@@ -48,6 +54,9 @@ class SignUpViewModel: ViewModel() {
             phoneNumber = phoneNumber,
             country = country,
             birthdate = birthdate,
+            email = email,
+            password = password,
+            isPasswordVisible = isPasswordVisible,
             isSignUpButtonEnabled = isSignUpButtonEnabled
         )
     }
@@ -73,7 +82,10 @@ class SignUpViewModel: ViewModel() {
         val country: String = "",
         val phoneNumber: String = "",
         val birthdate: String = "",
-        val isSignUpButtonEnabled: Boolean = false
+        val email: String = "",
+        val password: String = "",
+        val isSignUpButtonEnabled: Boolean = false,
+        val isPasswordVisible: Boolean = false
     )
 
     private fun ViewState.toUser() =
@@ -82,7 +94,9 @@ class SignUpViewModel: ViewModel() {
             lastName = lastName,
             country = country,
             phoneNumber = phoneNumber,
-            birthdate = birthdate
+            birthdate = birthdate,
+            email = email,
+            password = password
         )
 
     sealed interface ViewEvent {
@@ -91,8 +105,11 @@ class SignUpViewModel: ViewModel() {
         data class PhoneNumberChange(val value: String) : ViewEvent
         data class CountryChange(val value: String) : ViewEvent
         data class BirthdateChange(val value: String) : ViewEvent
+        data class EmailChange(val value: String) : ViewEvent
+        data class PasswordChange(val value: String) : ViewEvent
         object SignUpButtonClick : ViewEvent
         object CountryClick : ViewEvent
+        object PasswordSwitchClick: ViewEvent
         object OnKeyboardDone : ViewEvent
         object OnKeyboardNext : ViewEvent
         object NavigateBack : ViewEvent

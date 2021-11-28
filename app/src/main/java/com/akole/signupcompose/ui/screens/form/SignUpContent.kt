@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.akole.signupcompose.R
 import com.akole.signupcompose.ui.CustomOutlinedTextField
@@ -30,31 +31,16 @@ fun SignUpContent(
                 .fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(SignUpScreenDefaults.ArrangementSpacedBy)
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(SignUpScreenDefaults.ArrangementSpacedBy)
-            ) {
-                Box(Modifier.weight(1f)) {
-                    CustomOutlinedTextField(
-                        text = viewModel.viewState.firstName,
-                        onValueChange = {
-                            viewModel.on(SignUpViewModel.ViewEvent.FirstNameChange(it))
-                        },
-                        label = stringResource(id = R.string.sign_up_first_name_label_text)
-                    )
+            NameRow(
+                firstName = viewModel.viewState.firstName,
+                lastName = viewModel.viewState.lastName,
+                onFirstNameChange = {
+                    viewModel.on(SignUpViewModel.ViewEvent.FirstNameChange(it))
+                },
+                onLastNameChange = {
+                    viewModel.on(SignUpViewModel.ViewEvent.LastNameChange(it))
                 }
-                Box(Modifier.weight(1f)) {
-                    CustomOutlinedTextField(
-                        text = viewModel.viewState.lastName,
-                        onValueChange = {
-                            viewModel.on(SignUpViewModel.ViewEvent.LastNameChange(it))
-                        },
-                        label = stringResource(id = R.string.sign_up_last_name_label_text),
-                    )
-                }
-            }
+            )
             PhoneTextField(
                 phoneNumber = viewModel.viewState.phoneNumber,
                 country = viewModel.viewState.country,
@@ -63,6 +49,22 @@ fun SignUpContent(
                 },
                 onPhonePrefixClick = {
                     viewModel.on(SignUpViewModel.ViewEvent.CountryClick)
+                }
+            )
+            EmailTextField(
+                email = viewModel.viewState.email,
+                onEmailChange = {
+                    viewModel.on(SignUpViewModel.ViewEvent.EmailChange(it))
+                }
+            )
+            PasswordTextField(
+                password= viewModel.viewState.password,
+                isPasswordVisible = viewModel.viewState.isPasswordVisible,
+                onPasswordChange = {
+                    viewModel.on(SignUpViewModel.ViewEvent.PasswordChange(it))
+                },
+                onPasswordVisibilityClick = {
+                    viewModel.on(SignUpViewModel.ViewEvent.PasswordSwitchClick)
                 }
             )
         }

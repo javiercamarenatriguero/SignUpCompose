@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import com.akole.signupcompose.R
 import com.akole.signupcompose.ui.theme.Shapes
@@ -40,6 +41,7 @@ fun CustomOutlinedTextField(
     singleLine: Boolean = true,
     keyboardType: KeyboardType = KeyboardType.Text,
     imeAction: ImeAction = ImeAction.Next,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
     leadingIcon: @Composable (() -> Unit)? = null,
     modifier: Modifier = Modifier
 ) {
@@ -69,6 +71,7 @@ fun CustomOutlinedTextField(
                 onNext = { onKeyboardNext() },
                 onDone = { onKeyboardDone() },
             ),
+            visualTransformation = visualTransformation,
             trailingIcon = {
                 if (text.isNotEmpty() && enabled) {
                     Icon(

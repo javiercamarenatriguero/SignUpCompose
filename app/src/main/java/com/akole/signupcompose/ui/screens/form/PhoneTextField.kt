@@ -50,7 +50,7 @@ fun PhoneTextField(
                         contentDescription = ""
                     )
                     Text(
-                        text = countryToPhonePrefix[country] ?: "Spain",
+                        text = countryToPhonePrefix[country] ?: "+34",
                         fontWeight = FontWeight.Bold
                     )
                 }
