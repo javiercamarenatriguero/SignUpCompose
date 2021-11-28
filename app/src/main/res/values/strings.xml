@@ -3,4 +3,5 @@
     <string name="sign_up_first_name_label_text">First Name</string>
     <string name="sign_up_last_name_label_text">Last name</string>
     <string name="sign_up_phone_number_label_text">Phone number</string>
+    <string name="sign_up_country_label_text">Country</string>
 </resources>

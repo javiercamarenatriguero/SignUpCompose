@@ -8,10 +8,15 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
+import androidx.compose.material.ModalBottomSheetLayout
+import androidx.compose.material.ModalBottomSheetState
+import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -30,88 +35,39 @@ import com.akole.signupcompose.ui.screens.form.SignUpViewModel.OneShotEvent
 import com.akole.signupcompose.ui.screens.form.SignUpViewModel.ViewEvent
 import kotlinx.coroutines.flow.collect
 
+@ExperimentalMaterialApi
 @ExperimentalComposeUiApi
 @Composable
 fun SignUpScreen(
     viewModel: SignUpViewModel
 ) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(PaddingValues(BoxPaddingValues))
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(ArrangementSpacedBy)
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(ArrangementSpacedBy)
-            ) {
-                Box(Modifier.weight(1f)) {
-                    CustomOutlinedTextField(
-                        text = viewModel.viewState.firstName,
-                        onValueChange = {
-                            viewModel.on(ViewEvent.FirstNameChange(it))
-                        },
-                        label = stringResource(id = R.string.sign_up_first_name_label_text)
-                    )
-                }
-                Box(Modifier.weight(1f)) {
-                    CustomOutlinedTextField(
-                        text = viewModel.viewState.lastName,
-                        onValueChange = {
-                            viewModel.on(ViewEvent.LastNameChange(it))
-                        },
-                        label = stringResource(id = R.string.sign_up_last_name_label_text),
-                    )
-                }
-            }
-            CustomOutlinedTextField(
-                text = viewModel.viewState.phoneNumber,
-                onValueChange = {
-                    viewModel.on(ViewEvent.PhoneNumberChange(it))
-                },
-                label = stringResource(id = R.string.sign_up_phone_number_label_text),
-                leadingIcon = {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Phone,
-                            contentDescription = "",
-                            modifier = Modifier.padding(start = 10.dp, end = 5.dp)
-                        )
-                        Text(
-                            text = "(+91)",
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier.padding(start = 5.dp, end = 5.dp)
-                        )
-                    }
+    val modalBottomSheetState: ModalBottomSheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
+    ModalBottomSheetLayout(
+        sheetState = modalBottomSheetState,
+        sheetContent = {
+            CountryListModalSheetContent(
+                onItemClick = {
+                    viewModel.on(ViewEvent.CountryChange(it))
                 }
             )
         }
+    ) {
+        SignUpContent(viewModel = viewModel)
     }
 
     val keyboardController = LocalSoftwareKeyboardController.current
     LaunchedEffect(viewModel.oneShotEvents) {
         viewModel.oneShotEvents.collect { event ->
             when (event) {
+                OneShotEvent.OpenCountryModalSheet -> modalBottomSheetState?.show()
                 OneShotEvent.HideKeyboard -> keyboardController?.hide()
+                OneShotEvent.HideCountryModalSheet -> modalBottomSheetState?.hide()
             }
         }
     }
-
 }
 
-object SignUpScreenDefaults {
-    val ArrangementSpacedBy = 20.dp
-    val BoxPaddingValues = 10.dp
-}
-
+@ExperimentalMaterialApi
 @ExperimentalComposeUiApi
 @Composable
 @Preview(showBackground = true)

@@ -7,10 +7,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 private val LightColorPalette = lightColors(
-    primary = SignUpColor.pink,
+    primary = SignUpColor.tealDark,
     primaryVariant = SignUpColor.pinkDark,
     secondary = SignUpColor.teal,
-    secondaryVariant = SignUpColor.tealDark,
+    secondaryVariant = SignUpColor.pink,
     background = Color.White,
     surface = Color.White,
     onPrimary = Color.White,

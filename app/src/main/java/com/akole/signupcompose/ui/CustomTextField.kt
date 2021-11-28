@@ -4,6 +4,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
@@ -18,6 +20,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import com.akole.signupcompose.R
 import com.akole.signupcompose.ui.theme.Shapes
@@ -26,12 +30,16 @@ import com.akole.signupcompose.ui.theme.SignUpColor
 @Composable
 fun CustomOutlinedTextField(
     text: String = "",
-    onValueChange: (String) -> Unit,
+    onValueChange: (String) -> Unit = {},
+    onKeyboardNext: () -> Unit = {},
+    onKeyboardDone: () -> Unit = {},
     label: String = "",
     enabled: Boolean = true,
     isError: Boolean = false,
     errorText: String = "",
     singleLine: Boolean = true,
+    keyboardType: KeyboardType = KeyboardType.Text,
+    imeAction: ImeAction = ImeAction.Next,
     leadingIcon: @Composable (() -> Unit)? = null,
     modifier: Modifier = Modifier
 ) {
@@ -52,8 +60,17 @@ fun CustomOutlinedTextField(
                 focusedIndicatorColor = MaterialTheme.colors.primary,
                 focusedLabelColor = MaterialTheme.colors.primary
             ),
+            keyboardOptions = KeyboardOptions(
+                autoCorrect = false,
+                keyboardType = keyboardType,
+                imeAction = imeAction
+            ),
+            keyboardActions = KeyboardActions(
+                onNext = { onKeyboardNext() },
+                onDone = { onKeyboardDone() },
+            ),
             trailingIcon = {
-                if (text.isNotEmpty()) {
+                if (text.isNotEmpty() && enabled) {
                     Icon(
                         imageVector = Icons.Filled.Close,
                         contentDescription = "Clear text icon",

@@ -24,8 +24,9 @@ class SignUpViewModel: ViewModel() {
             is ViewEvent.FirstNameChange -> updateState(firstName = value)
             is ViewEvent.LastNameChange -> updateState(lastName = value)
             is ViewEvent.PhoneNumberChange -> updateState(phoneNumber = value)
-            is ViewEvent.CountryChange -> updateState(country = value)
+            is ViewEvent.CountryChange -> onCountryChange(country = value)
             is ViewEvent.BirthdateChange -> updateState(birthdate = value)
+            ViewEvent.CountryClick -> onCountryClick()
             ViewEvent.SignUpButtonClick -> emit(OneShotEvent.SignUpCompleted(viewState.toUser()))
             ViewEvent.OnKeyboardDone -> emit(OneShotEvent.HideKeyboard)
             ViewEvent.NavigateBack -> emit(OneShotEvent.ClosePage)
@@ -49,6 +50,15 @@ class SignUpViewModel: ViewModel() {
             birthdate = birthdate,
             isSignUpButtonEnabled = isSignUpButtonEnabled
         )
+    }
+
+    private fun onCountryClick() {
+        emit(OneShotEvent.HideKeyboard)
+        emit(OneShotEvent.OpenCountryModalSheet)
+    }
+    private fun onCountryChange(country: String) {
+        updateState(country = country)
+        emit(OneShotEvent.HideCountryModalSheet)
     }
 
     private fun emit(event: OneShotEvent) {
@@ -82,6 +92,7 @@ class SignUpViewModel: ViewModel() {
         data class CountryChange(val value: String) : ViewEvent
         data class BirthdateChange(val value: String) : ViewEvent
         object SignUpButtonClick : ViewEvent
+        object CountryClick : ViewEvent
         object OnKeyboardDone : ViewEvent
         object OnKeyboardNext : ViewEvent
         object NavigateBack : ViewEvent
@@ -90,6 +101,8 @@ class SignUpViewModel: ViewModel() {
     sealed interface OneShotEvent {
         object ClosePage : OneShotEvent
         object HideKeyboard : OneShotEvent
+        object OpenCountryModalSheet : OneShotEvent
+        object HideCountryModalSheet : OneShotEvent
         data class SignUpCompleted(val user: User) : OneShotEvent
     }
 }
