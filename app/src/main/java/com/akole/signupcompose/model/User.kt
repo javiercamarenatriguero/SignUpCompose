@@ -1,9 +1,9 @@
 package com.akole.signupcompose.model
 
 data class User (
-    val name: String,
-    val surname: String,
+    val firstName: String,
+    val lastName: String,
+    val phoneNumber: String?,
     val country: String,
-    val birthdate: String,
-    val phoneNumber: String?
+    val birthdate: String
     )

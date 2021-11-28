@@ -9,12 +9,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -22,15 +21,14 @@ import com.akole.signupcompose.R
 import com.akole.signupcompose.ui.CustomOutlinedTextField
 import com.akole.signupcompose.ui.screens.form.SignUpScreenDefaults.ArrangementSpacedBy
 import com.akole.signupcompose.ui.screens.form.SignUpScreenDefaults.BoxPaddingValues
+import com.akole.signupcompose.ui.screens.form.SignUpViewModel.OneShotEvent
+import com.akole.signupcompose.ui.screens.form.SignUpViewModel.ViewEvent
+import kotlinx.coroutines.flow.collect
 
+@ExperimentalComposeUiApi
 @Composable
 fun SignUpScreen(
-    firstNameText: String,
-    lastNameText: String,
-    phoneNumberText: String,
-    onFirstNameValueChange: (String) -> Unit,
-    onLastNameValueChange: (String) -> Unit,
-    onPhoneNumberValueChange: (String) -> Unit,
+    viewModel: SignUpViewModel
 ) {
     Box(
         modifier = Modifier
@@ -50,26 +48,42 @@ fun SignUpScreen(
             ) {
                 Box(Modifier.weight(1f)) {
                     CustomOutlinedTextField(
-                        text = firstNameText,
-                        onValueChange = onFirstNameValueChange,
-                        label = stringResource(id = R.string.sign_up_first_name_label_text),
+                        text = viewModel.viewState.firstName,
+                        onValueChange = {
+                            viewModel.on(ViewEvent.FirstNameChange(it))
+                        },
+                        label = stringResource(id = R.string.sign_up_first_name_label_text)
                     )
                 }
                 Box(Modifier.weight(1f)) {
                     CustomOutlinedTextField(
-                        text = lastNameText,
-                        onValueChange = onLastNameValueChange,
+                        text = viewModel.viewState.lastName,
+                        onValueChange = {
+                            viewModel.on(ViewEvent.LastNameChange(it))
+                        },
                         label = stringResource(id = R.string.sign_up_last_name_label_text),
-                        )
+                    )
                 }
             }
             CustomOutlinedTextField(
-                text = phoneNumberText,
-                onValueChange = onPhoneNumberValueChange,
+                text = viewModel.viewState.phoneNumber,
+                onValueChange = {
+                    viewModel.on(ViewEvent.PhoneNumberChange(it))
+                },
                 label = stringResource(id = R.string.sign_up_phone_number_label_text)
             )
         }
     }
+
+    val keyboardController = LocalSoftwareKeyboardController.current
+    LaunchedEffect(viewModel.oneShotEvents) {
+        viewModel.oneShotEvents.collect { event ->
+            when (event) {
+                OneShotEvent.HideKeyboard -> keyboardController?.hide()
+            }
+        }
+    }
+
 }
 
 object SignUpScreenDefaults {
@@ -77,28 +91,11 @@ object SignUpScreenDefaults {
     val BoxPaddingValues = 10.dp
 }
 
+@ExperimentalComposeUiApi
 @Composable
 @Preview(showBackground = true)
 fun SignUpScreenPreview() {
-    var firstNameText by rememberSaveable { mutableStateOf("") }
-    var lastNameText by rememberSaveable { mutableStateOf("") }
-    var phoneNumberText by rememberSaveable { mutableStateOf("") }
-    val onFirstNameValueChange: (String) -> Unit = {
-        firstNameText = it
-    }
-    val onLastNameValueChange: (String) -> Unit = {
-        lastNameText = it
-    }
-    val onPhoneNumberValueChange: (String) -> Unit = {
-        phoneNumberText = it
-    }
-
     SignUpScreen(
-        firstNameText = firstNameText,
-        lastNameText = lastNameText,
-        phoneNumberText = phoneNumberText,
-        onFirstNameValueChange = onFirstNameValueChange,
-        onLastNameValueChange = onLastNameValueChange,
-        onPhoneNumberValueChange = onPhoneNumberValueChange
+        viewModel = SignUpViewModel()
     )
 }
