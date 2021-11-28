@@ -32,6 +32,7 @@ fun CustomOutlinedTextField(
     isError: Boolean = false,
     errorText: String = "",
     singleLine: Boolean = true,
+    leadingIcon: @Composable (() -> Unit)? = null,
     modifier: Modifier = Modifier
 ) {
     Column {
@@ -61,7 +62,8 @@ fun CustomOutlinedTextField(
                             .clickable { onValueChange("") }
                     )
                 }
-            }
+            },
+            leadingIcon = leadingIcon
         )
         if (isError) {
             val errorTextPadding = dimensionResource(id = R.dimen.textfield_error_start_padding)
