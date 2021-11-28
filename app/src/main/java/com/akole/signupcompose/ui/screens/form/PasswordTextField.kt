@@ -32,7 +32,7 @@ fun PasswordTextField(
         horizontalArrangement = Arrangement.spacedBy(SignUpScreenDefaults.ArrangementSpacedBy)
     ) {
         CustomOutlinedTextField(
-            text = password,
+            value = password,
             keyboardType = KeyboardType.Password,
             visualTransformation = if(isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             onValueChange = onPasswordChange,

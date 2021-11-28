@@ -30,7 +30,7 @@ import com.akole.signupcompose.ui.theme.SignUpColor
 
 @Composable
 fun CustomOutlinedTextField(
-    text: String = "",
+    value: String = "",
     onValueChange: (String) -> Unit = {},
     onKeyboardNext: () -> Unit = {},
     onKeyboardDone: () -> Unit = {},
@@ -47,7 +47,7 @@ fun CustomOutlinedTextField(
 ) {
     Column {
         OutlinedTextField(
-            value = text,
+            value = value,
             onValueChange = { onValueChange(it)},
             label = {
                 Text( text = label)
@@ -73,7 +73,7 @@ fun CustomOutlinedTextField(
             ),
             visualTransformation = visualTransformation,
             trailingIcon = {
-                if (text.isNotEmpty() && enabled) {
+                if (value.isNotEmpty() && enabled) {
                     Icon(
                         imageVector = Icons.Filled.Close,
                         contentDescription = "Clear text icon",

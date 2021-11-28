@@ -12,7 +12,7 @@ fun EmailTextField(
     onEmailChange: (String) -> Unit,
 ) {
     CustomOutlinedTextField(
-        text = email,
+        value = email,
         keyboardType = KeyboardType.Email,
         onValueChange = onEmailChange,
         label = stringResource(id = R.string.sign_up_email_label_text),

@@ -26,14 +26,14 @@ fun NameRow(
     ) {
         Box(Modifier.weight(1f)) {
             CustomOutlinedTextField(
-                text = firstName,
+                value = firstName,
                 onValueChange = onFirstNameChange,
                 label = stringResource(id = R.string.sign_up_first_name_label_text)
             )
         }
         Box(Modifier.weight(1f)) {
             CustomOutlinedTextField(
-                text = lastName,
+                value = lastName,
                 onValueChange = onLastNameChange,
                 label = stringResource(id = R.string.sign_up_last_name_label_text),
             )

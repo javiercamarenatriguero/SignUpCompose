@@ -1,10 +1,15 @@
 <resources>
     <string name="app_name">SignUpCompose</string>
+
+    <!-- SignUp Screen-->
     <string name="sign_up_first_name_label_text">First Name</string>
     <string name="sign_up_last_name_label_text">Last name</string>
     <string name="sign_up_phone_number_label_text">Phone number</string>
     <string name="sign_up_country_label_text">Country</string>
+    <string name="sign_up_birthdate_label_text">Birthdate (dd/MM/yyyy)</string>
     <string name="sign_up_email_label_text">Email address</string>
     <string name="sign_up_password_label_text">Password</string>
+
+    <!-- ModalBottonSheet-->
     <string name="select_country_text">Select a country</string>
 </resources>

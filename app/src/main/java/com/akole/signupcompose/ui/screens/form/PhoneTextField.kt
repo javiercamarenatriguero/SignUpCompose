@@ -27,7 +27,7 @@ fun PhoneTextField(
     onPhonePrefixClick: () -> Unit
 ) {
     CustomOutlinedTextField(
-        text = phoneNumber,
+        value = phoneNumber,
         onValueChange = onPhoneNumberChange,
         label = stringResource(id = R.string.sign_up_phone_number_label_text),
         keyboardType = KeyboardType.Phone,
@@ -50,6 +50,7 @@ fun PhoneTextField(
                         contentDescription = ""
                     )
                     Text(
+                        // Set Spain as default prefix
                         text = countryToPhonePrefix[country] ?: "+34",
                         fontWeight = FontWeight.Bold
                     )

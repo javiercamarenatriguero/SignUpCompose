@@ -27,7 +27,7 @@ class SignUpViewModel: ViewModel() {
             is ViewEvent.CountryChange -> onCountryChange(country = value)
             is ViewEvent.EmailChange -> updateState(email = value)
             is ViewEvent.PasswordChange -> updateState(password = value)
-            is ViewEvent.BirthdateChange -> updateState(birthdate = value)
+            is ViewEvent.BirthdateChange -> onBirthdateChange(birthdate = value)
             ViewEvent.PasswordSwitchClick -> updateState(isPasswordVisible = !viewState.isPasswordVisible)
             ViewEvent.CountryClick -> onCountryClick()
             ViewEvent.SignUpButtonClick -> emit(OneShotEvent.SignUpCompleted(viewState.toUser()))
@@ -65,9 +65,14 @@ class SignUpViewModel: ViewModel() {
         emit(OneShotEvent.HideKeyboard)
         emit(OneShotEvent.OpenCountryModalSheet)
     }
+
     private fun onCountryChange(country: String) {
         updateState(country = country)
         emit(OneShotEvent.HideCountryModalSheet)
+    }
+
+    private fun onBirthdateChange(birthdate: String) {
+        if (birthdate.length <= MAX_BIRTHDATE_CHAR) updateState(birthdate = birthdate)
     }
 
     private fun emit(event: OneShotEvent) {
@@ -121,5 +126,9 @@ class SignUpViewModel: ViewModel() {
         object OpenCountryModalSheet : OneShotEvent
         object HideCountryModalSheet : OneShotEvent
         data class SignUpCompleted(val user: User) : OneShotEvent
+    }
+
+    companion object {
+        const val MAX_BIRTHDATE_CHAR = 8
     }
 }
