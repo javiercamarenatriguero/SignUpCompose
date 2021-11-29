@@ -1,6 +1,5 @@
-package com.akole.signupcompose.ui.screens.form
+package com.akole.signupcompose.ui.screens.signup
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -15,19 +14,19 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.akole.signupcompose.R
 import com.akole.signupcompose.ui.CustomOutlinedTextField
-import com.akole.signupcompose.utils.DateTransformation
+import com.akole.signupcompose.utils.transformation.DateTransformation
 
 @Composable
 fun BirthDateTextField(
     birthdate: String,
     onBirthdateChange: (String) -> Unit,
-    onKeyboardNext: () -> Unit
+    onKeyboardNext: () -> Unit,
+    isError: Boolean
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(SignUpScreenDefaults.ArrangementSpacedBy)
+        verticalAlignment = Alignment.CenterVertically
     ) {
         CustomOutlinedTextField(
             value = birthdate,
@@ -42,7 +41,9 @@ fun BirthDateTextField(
                     contentDescription = "",
                     modifier = Modifier.padding(start = 10.dp, end = 5.dp)
                 )
-            }
+            },
+            isError = isError,
+            errorText = stringResource(id = R.string.sign_up_date_error_text),
         )
     }
 }

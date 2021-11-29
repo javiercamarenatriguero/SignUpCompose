@@ -1,4 +1,4 @@
-package com.akole.signupcompose.ui.screens.form
+package com.akole.signupcompose.ui.screens.signup
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,7 +14,7 @@ import com.akole.signupcompose.R
 @Composable
 fun SignUpButton(
     onClick: () -> Unit,
-    enabled: Boolean
+    enabled: Boolean = true
 ) {
     Box(
         modifier = Modifier

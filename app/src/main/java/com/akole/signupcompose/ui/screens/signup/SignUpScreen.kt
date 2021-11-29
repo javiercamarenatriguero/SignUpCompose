@@ -1,4 +1,4 @@
-package com.akole.signupcompose.ui.screens.form
+package com.akole.signupcompose.ui.screens.signup
 
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetLayout
@@ -12,8 +12,8 @@ import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.tooling.preview.Preview
-import com.akole.signupcompose.ui.screens.form.SignUpViewModel.OneShotEvent
-import com.akole.signupcompose.ui.screens.form.SignUpViewModel.ViewEvent
+import com.akole.signupcompose.ui.screens.signup.SignUpViewModel.OneShotEvent
+import com.akole.signupcompose.ui.screens.signup.SignUpViewModel.ViewEvent
 import kotlinx.coroutines.flow.collect
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -46,17 +46,8 @@ fun SignUpScreen(
                 OneShotEvent.HideCountryModalSheet -> modalBottomSheetState.hide()
                 OneShotEvent.FocusRight -> focusManager.moveFocus(FocusDirection.Right)
                 OneShotEvent.FocusDown -> focusManager.moveFocus(FocusDirection.Down)
+                else -> {}
             }
         }
     }
-}
-
-@OptIn(ExperimentalMaterialApi::class)
-@ExperimentalComposeUiApi
-@Composable
-@Preview(showBackground = true)
-fun SignUpScreenPreview() {
-    SignUpScreen(
-        viewModel = SignUpViewModel()
-    )
 }

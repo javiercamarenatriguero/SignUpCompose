@@ -1,4 +1,4 @@
-package com.akole.signupcompose.ui.screens.form
+package com.akole.signupcompose.ui.screens.signup
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -16,8 +16,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.akole.signupcompose.R
-import com.akole.signupcompose.countryToPhonePrefix
+import com.akole.signupcompose.utils.countryToPhonePrefix
 import com.akole.signupcompose.ui.CustomOutlinedTextField
+import com.akole.signupcompose.utils.transformation.PhoneNumberTransformation
 
 @Composable
 fun PhoneTextField(
@@ -25,14 +26,18 @@ fun PhoneTextField(
     country: String,
     onPhoneNumberChange: (String) -> Unit,
     onPhonePrefixClick: () -> Unit,
-    onKeyboardNext: () -> Unit
+    onKeyboardNext: () -> Unit,
+    isError: Boolean
 ) {
     CustomOutlinedTextField(
         value = phoneNumber,
         onValueChange = onPhoneNumberChange,
         label = stringResource(id = R.string.sign_up_phone_number_label_text),
+        visualTransformation = PhoneNumberTransformation(),
         keyboardType = KeyboardType.Phone,
         onKeyboardNext = onKeyboardNext,
+        isError = isError,
+        errorText = stringResource(id = R.string.sign_up_phone_error_text),
         leadingIcon = {
             Row(
                 verticalAlignment = Alignment.CenterVertically

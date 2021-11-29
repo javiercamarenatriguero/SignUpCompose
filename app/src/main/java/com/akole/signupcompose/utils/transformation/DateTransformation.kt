@@ -1,4 +1,4 @@
-package com.akole.signupcompose.utils
+package com.akole.signupcompose.utils.transformation
 
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.input.OffsetMapping

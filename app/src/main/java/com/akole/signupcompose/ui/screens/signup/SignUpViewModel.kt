@@ -1,4 +1,4 @@
-package com.akole.signupcompose.ui.screens.form
+package com.akole.signupcompose.ui.screens.signup
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -6,6 +6,11 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.akole.signupcompose.model.User
+import com.akole.signupcompose.utils.isReadyToSignUp
+import com.akole.signupcompose.utils.isValidDate
+import com.akole.signupcompose.utils.isValidEmail
+import com.akole.signupcompose.utils.isValidPassword
+import com.akole.signupcompose.utils.isValidPhoneNumber
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -23,19 +28,18 @@ class SignUpViewModel: ViewModel() {
         when (this) {
             is ViewEvent.FirstNameChange -> updateState(firstName = value)
             is ViewEvent.LastNameChange -> updateState(lastName = value)
-            is ViewEvent.PhoneNumberChange -> updateState(phoneNumber = value)
+            is ViewEvent.PhoneNumberChange -> onPhoneChange(phoneNumber = value)
             is ViewEvent.CountryChange -> onCountryChange(country = value)
             is ViewEvent.EmailChange -> updateState(email = value)
             is ViewEvent.PasswordChange -> updateState(password = value)
             is ViewEvent.BirthdateChange -> onBirthdateChange(birthdate = value)
             ViewEvent.PasswordSwitchClick -> updateState(isPasswordVisible = !viewState.isPasswordVisible)
             ViewEvent.CountryClick -> onCountryClick()
-            ViewEvent.SignUpButtonClick -> emit(OneShotEvent.SignUpCompleted(viewState.toUser()))
+            ViewEvent.SignUpButtonClick -> onSignUpButtonClick()
             ViewEvent.OnKeyboardNext -> emit(OneShotEvent.FocusRight)
             ViewEvent.OnKeyboardDown -> emit(OneShotEvent.FocusDown)
             ViewEvent.OnKeyboardDone -> emit(OneShotEvent.HideKeyboard)
             ViewEvent.NavigateBack -> emit(OneShotEvent.ClosePage)
-            else -> {}
         }
     }
 
@@ -48,7 +52,7 @@ class SignUpViewModel: ViewModel() {
         email: String = viewState.email,
         password: String = viewState.password,
         isPasswordVisible: Boolean = viewState.isPasswordVisible,
-        isSignUpButtonEnabled: Boolean = viewState.isSignUpButtonEnabled
+        isSignUpButtonClicked: Boolean = viewState.isSignUpButtonClicked
     ) {
         viewState = ViewState(
             firstName = firstName,
@@ -59,9 +63,27 @@ class SignUpViewModel: ViewModel() {
             email = email,
             password = password,
             isPasswordVisible = isPasswordVisible,
-            isSignUpButtonEnabled = isSignUpButtonEnabled
+            isSignUpButtonClicked = isSignUpButtonClicked
         )
     }
+
+    fun isPasswordNotValid(): Boolean =
+        viewState.isSignUpButtonClicked && !viewState.password.isValidPassword()
+
+    fun isEmailNotValid(): Boolean =
+        viewState.isSignUpButtonClicked && !viewState.email.isValidEmail()
+
+    fun isFirstNameNotValid(): Boolean =
+        viewState.isSignUpButtonClicked && viewState.firstName.isEmpty()
+
+    fun isLastNameNotValid(): Boolean =
+        viewState.isSignUpButtonClicked && viewState.lastName.isEmpty()
+
+    fun isBirthdateNotValid(): Boolean =
+        viewState.isSignUpButtonClicked && !viewState.birthdate.isValidDate()
+
+    fun isPhoneNumberNotValid(): Boolean =
+        viewState.isSignUpButtonClicked && !viewState.phoneNumber.isValidPhoneNumber()
 
     private fun onCountryClick() {
         emit(OneShotEvent.HideKeyboard)
@@ -75,6 +97,17 @@ class SignUpViewModel: ViewModel() {
 
     private fun onBirthdateChange(birthdate: String) {
         if (birthdate.length <= MAX_BIRTHDATE_CHAR) updateState(birthdate = birthdate)
+    }
+
+    private fun onPhoneChange(phoneNumber: String) {
+        if (phoneNumber.length <= MAX_PHONE_NUMBER_CHAR) updateState(phoneNumber = phoneNumber)
+    }
+
+    private fun onSignUpButtonClick() {
+        updateState(isSignUpButtonClicked = true)
+        if (viewState.isReadyToSignUp()) {
+            emit(OneShotEvent.SignUpCompleted(viewState.toUser()))
+        }
     }
 
     private fun emit(event: OneShotEvent) {
@@ -91,7 +124,7 @@ class SignUpViewModel: ViewModel() {
         val birthdate: String = "",
         val email: String = "",
         val password: String = "",
-        val isSignUpButtonEnabled: Boolean = false,
+        val isSignUpButtonClicked: Boolean = false,
         val isPasswordVisible: Boolean = false
     )
 
@@ -135,5 +168,6 @@ class SignUpViewModel: ViewModel() {
 
     companion object {
         const val MAX_BIRTHDATE_CHAR = 8
+        const val MAX_PHONE_NUMBER_CHAR = 9
     }
 }

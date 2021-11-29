@@ -10,9 +10,18 @@
     <string name="sign_up_email_label_text">Email address</string>
     <string name="sign_up_password_label_text">Password</string>
     <string name="sign_up_button_text">Sign Up!</string>
+    <string name="sign_up_title_text">Create Account</string>
+
+    <!-- Errors-->
+    <string name="sign_up_phone_error_text">Introduce 9 digits</string>
+    <string name="sign_up_password_error_text">Introduce between 8 and 15 characters</string>
+    <string name="sign_up_email_error_text">Introduce a valid email address</string>
+    <string name="sign_up_date_error_text">Introduce a valid date (dd/MM/yyyy)</string>
+    <string name="sign_up_first_name_error_text">Introduce a valid first name</string>
+    <string name="sign_up_last_name_error_text">Introduce a valid last name</string>
 
     <!-- ModalBottonSheet-->
     <string name="select_country_text">Select a country</string>
-    <string name="sign_up_title_text">Create Account</string>
+
 
 </resources>

@@ -1,4 +1,4 @@
-package com.akole.signupcompose
+package com.akole.signupcompose.utils
 
 val countryToPhonePrefix = mapOf(
     "Austria" to "+43",
