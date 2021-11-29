@@ -9,7 +9,10 @@
     <string name="sign_up_birthdate_label_text">Birthdate (dd/MM/yyyy)</string>
     <string name="sign_up_email_label_text">Email address</string>
     <string name="sign_up_password_label_text">Password</string>
+    <string name="sign_up_button_text">Sign Up!</string>
 
     <!-- ModalBottonSheet-->
     <string name="select_country_text">Select a country</string>
+    <string name="sign_up_title_text">Create Account</string>
+
 </resources>

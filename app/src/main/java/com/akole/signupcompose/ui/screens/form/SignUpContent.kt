@@ -3,30 +3,31 @@ package com.akole.signupcompose.ui.screens.form
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.akole.signupcompose.ui.CustomOutlinedTextField
-import com.akole.signupcompose.utils.DateTransformation
+import com.google.accompanist.insets.navigationBarsWithImePadding
 
 @Composable
 fun SignUpContent(
     viewModel: SignUpViewModel
 ) {
+    val scrollState = rememberScrollState()
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(PaddingValues(SignUpScreenDefaults.BoxPaddingValues))
+            .navigationBarsWithImePadding()
+            .verticalScroll(state = scrollState, reverseScrolling = true)
+            .padding(horizontal = 16.dp),
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(SignUpScreenDefaults.ArrangementSpacedBy)
         ) {
+            TitleText()
             NameRow(
                 firstName = viewModel.viewState.firstName,
                 lastName = viewModel.viewState.lastName,
@@ -68,6 +69,12 @@ fun SignUpContent(
                 onPasswordVisibilityClick = {
                     viewModel.on(SignUpViewModel.ViewEvent.PasswordSwitchClick)
                 }
+            )
+            SignUpButton(
+                onClick = {
+                    viewModel.on(SignUpViewModel.ViewEvent.SignUpButtonClick)
+                },
+                enabled = viewModel.viewState.isSignUpButtonEnabled
             )
         }
     }

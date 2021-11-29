@@ -7,5 +7,5 @@ val countryToPhonePrefix = mapOf(
     "Germany" to "+49",
     "Italy" to "+39",
     "Spain" to "+34",
-    "United Kingdom" to "+32"
+    "United Kingdom" to "+44"
 )

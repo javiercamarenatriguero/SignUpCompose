@@ -14,7 +14,7 @@ import com.akole.signupcompose.ui.screens.form.SignUpViewModel.OneShotEvent
 import com.akole.signupcompose.ui.screens.form.SignUpViewModel.ViewEvent
 import kotlinx.coroutines.flow.collect
 
-@ExperimentalMaterialApi
+@OptIn(ExperimentalMaterialApi::class)
 @ExperimentalComposeUiApi
 @Composable
 fun SignUpScreen(
@@ -38,9 +38,9 @@ fun SignUpScreen(
     LaunchedEffect(viewModel.oneShotEvents) {
         viewModel.oneShotEvents.collect { event ->
             when (event) {
-                OneShotEvent.OpenCountryModalSheet -> modalBottomSheetState?.show()
+                OneShotEvent.OpenCountryModalSheet -> modalBottomSheetState.show()
                 OneShotEvent.HideKeyboard -> keyboardController?.hide()
-                OneShotEvent.HideCountryModalSheet -> modalBottomSheetState?.hide()
+                OneShotEvent.HideCountryModalSheet -> modalBottomSheetState.hide()
             }
         }
     }
