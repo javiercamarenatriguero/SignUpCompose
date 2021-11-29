@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SignUpCompose</string>
+    <string name="app_name">SignUp Compose</string>
 
     <!-- SignUp Screen-->
     <string name="sign_up_first_name_label_text">First Name</string>
@@ -20,7 +20,7 @@
     <string name="sign_up_first_name_error_text">Introduce a valid first name</string>
     <string name="sign_up_last_name_error_text">Introduce a valid last name</string>
 
-    <!-- ModalBottonSheet-->
+    <!-- ModalBottomSheet-->
     <string name="select_country_text">Select a country</string>
 
     <!-- Dialog-->
