@@ -16,7 +16,9 @@ fun NameRow(
     firstName: String,
     lastName: String,
     onFirstNameChange: (String) -> Unit,
-    onLastNameChange: (String) -> Unit
+    onLastNameChange: (String) -> Unit,
+    onKeyboardNext: () -> Unit,
+    onKeyboardDown: () -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -28,7 +30,8 @@ fun NameRow(
             CustomOutlinedTextField(
                 value = firstName,
                 onValueChange = onFirstNameChange,
-                label = stringResource(id = R.string.sign_up_first_name_label_text)
+                label = stringResource(id = R.string.sign_up_first_name_label_text),
+                onKeyboardNext = onKeyboardNext
             )
         }
         Box(Modifier.weight(1f)) {
@@ -36,6 +39,7 @@ fun NameRow(
                 value = lastName,
                 onValueChange = onLastNameChange,
                 label = stringResource(id = R.string.sign_up_last_name_label_text),
+                onKeyboardNext = onKeyboardDown
             )
         }
     }

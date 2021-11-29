@@ -24,13 +24,15 @@ fun PhoneTextField(
     phoneNumber: String,
     country: String,
     onPhoneNumberChange: (String) -> Unit,
-    onPhonePrefixClick: () -> Unit
+    onPhonePrefixClick: () -> Unit,
+    onKeyboardNext: () -> Unit
 ) {
     CustomOutlinedTextField(
         value = phoneNumber,
         onValueChange = onPhoneNumberChange,
         label = stringResource(id = R.string.sign_up_phone_number_label_text),
         keyboardType = KeyboardType.Phone,
+        onKeyboardNext = onKeyboardNext,
         leadingIcon = {
             Row(
                 verticalAlignment = Alignment.CenterVertically

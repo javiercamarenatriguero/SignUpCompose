@@ -36,6 +36,12 @@ fun SignUpContent(
                 },
                 onLastNameChange = {
                     viewModel.on(SignUpViewModel.ViewEvent.LastNameChange(it))
+                },
+                onKeyboardNext = {
+                    viewModel.on(SignUpViewModel.ViewEvent.OnKeyboardNext)
+                },
+                onKeyboardDown = {
+                    viewModel.on(SignUpViewModel.ViewEvent.OnKeyboardDown)
                 }
             )
             PhoneTextField(
@@ -46,18 +52,27 @@ fun SignUpContent(
                 },
                 onPhonePrefixClick = {
                     viewModel.on(SignUpViewModel.ViewEvent.CountryClick)
+                },
+                onKeyboardNext = {
+                    viewModel.on(SignUpViewModel.ViewEvent.OnKeyboardDown)
                 }
             )
             BirthDateTextField(
                 birthdate = viewModel.viewState.birthdate,
                 onBirthdateChange = {
                     viewModel.on(SignUpViewModel.ViewEvent.BirthdateChange(it))
+                },
+                onKeyboardNext = {
+                    viewModel.on(SignUpViewModel.ViewEvent.OnKeyboardDown)
                 }
             )
             EmailTextField(
                 email = viewModel.viewState.email,
                 onEmailChange = {
                     viewModel.on(SignUpViewModel.ViewEvent.EmailChange(it))
+                },
+                onKeyboardNext = {
+                    viewModel.on(SignUpViewModel.ViewEvent.OnKeyboardDown)
                 }
             )
             PasswordTextField(
@@ -68,6 +83,9 @@ fun SignUpContent(
                 },
                 onPasswordVisibilityClick = {
                     viewModel.on(SignUpViewModel.ViewEvent.PasswordSwitchClick)
+                },
+                onKeyboardNext = {
+                    viewModel.on(SignUpViewModel.ViewEvent.OnKeyboardDown)
                 }
             )
             SignUpButton(

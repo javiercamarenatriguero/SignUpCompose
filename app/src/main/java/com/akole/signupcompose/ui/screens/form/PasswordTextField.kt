@@ -23,7 +23,8 @@ fun PasswordTextField(
     password: String,
     isPasswordVisible: Boolean,
     onPasswordChange: (String) -> Unit,
-    onPasswordVisibilityClick: () -> Unit
+    onPasswordVisibilityClick: () -> Unit,
+    onKeyboardNext: () -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -37,6 +38,7 @@ fun PasswordTextField(
             visualTransformation = if(isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             onValueChange = onPasswordChange,
             label = stringResource(id = R.string.sign_up_password_label_text),
+            onKeyboardNext = onKeyboardNext
         )
         IconButton(
             onClick = onPasswordVisibilityClick

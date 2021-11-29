@@ -20,7 +20,8 @@ import com.akole.signupcompose.utils.DateTransformation
 @Composable
 fun BirthDateTextField(
     birthdate: String,
-    onBirthdateChange: (String) -> Unit
+    onBirthdateChange: (String) -> Unit,
+    onKeyboardNext: () -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -31,6 +32,7 @@ fun BirthDateTextField(
         CustomOutlinedTextField(
             value = birthdate,
             keyboardType = KeyboardType.Number,
+            onKeyboardNext = onKeyboardNext,
             visualTransformation = DateTransformation(),
             onValueChange = onBirthdateChange,
             label = stringResource(id = R.string.sign_up_birthdate_label_text),

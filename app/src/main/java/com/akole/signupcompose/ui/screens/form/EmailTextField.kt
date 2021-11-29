@@ -10,11 +10,13 @@ import com.akole.signupcompose.ui.CustomOutlinedTextField
 fun EmailTextField(
     email: String,
     onEmailChange: (String) -> Unit,
+    onKeyboardNext: () -> Unit
 ) {
     CustomOutlinedTextField(
         value = email,
         keyboardType = KeyboardType.Email,
         onValueChange = onEmailChange,
         label = stringResource(id = R.string.sign_up_email_label_text),
+        onKeyboardNext = onKeyboardNext
     )
 }

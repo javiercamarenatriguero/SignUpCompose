@@ -31,6 +31,8 @@ class SignUpViewModel: ViewModel() {
             ViewEvent.PasswordSwitchClick -> updateState(isPasswordVisible = !viewState.isPasswordVisible)
             ViewEvent.CountryClick -> onCountryClick()
             ViewEvent.SignUpButtonClick -> emit(OneShotEvent.SignUpCompleted(viewState.toUser()))
+            ViewEvent.OnKeyboardNext -> emit(OneShotEvent.FocusRight)
+            ViewEvent.OnKeyboardDown -> emit(OneShotEvent.FocusDown)
             ViewEvent.OnKeyboardDone -> emit(OneShotEvent.HideKeyboard)
             ViewEvent.NavigateBack -> emit(OneShotEvent.ClosePage)
             else -> {}
@@ -117,12 +119,15 @@ class SignUpViewModel: ViewModel() {
         object PasswordSwitchClick: ViewEvent
         object OnKeyboardDone : ViewEvent
         object OnKeyboardNext : ViewEvent
+        object OnKeyboardDown : ViewEvent
         object NavigateBack : ViewEvent
     }
 
     sealed interface OneShotEvent {
         object ClosePage : OneShotEvent
         object HideKeyboard : OneShotEvent
+        object FocusRight : OneShotEvent
+        object FocusDown : OneShotEvent
         object OpenCountryModalSheet : OneShotEvent
         object HideCountryModalSheet : OneShotEvent
         data class SignUpCompleted(val user: User) : OneShotEvent
