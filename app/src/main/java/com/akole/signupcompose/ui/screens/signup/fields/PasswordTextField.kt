@@ -1,4 +1,4 @@
-package com.akole.signupcompose.ui.screens.signup
+package com.akole.signupcompose.ui.screens.signup.fields
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,7 +19,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.akole.signupcompose.R
-import com.akole.signupcompose.ui.CustomOutlinedTextField
+import com.akole.signupcompose.ui.common.CustomOutlinedTextField
 
 @Composable
 fun PasswordTextField(

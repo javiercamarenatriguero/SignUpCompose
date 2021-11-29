@@ -23,5 +23,10 @@
     <!-- ModalBottonSheet-->
     <string name="select_country_text">Select a country</string>
 
+    <!-- Dialog-->
+    <string name="sign_up_success_dialog_title_text">Sign Up Success!</string>
+    <string name="sign_up_success_dialog_done_button_text">Close</string>
+    <string name="sign_up_success_dialog_edit_button_text">Edit</string>
+    <string name="sign_up_success_dialog_message">Thanks %1$s %1$s for registering on our platform. Please, make sure your email and phone are correct and click on Done if everything is OK.</string>
 
 </resources>

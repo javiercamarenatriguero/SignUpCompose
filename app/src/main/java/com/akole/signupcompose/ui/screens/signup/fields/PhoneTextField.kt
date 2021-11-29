@@ -1,4 +1,4 @@
-package com.akole.signupcompose.ui.screens.signup
+package com.akole.signupcompose.ui.screens.signup.fields
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -17,7 +17,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.akole.signupcompose.R
 import com.akole.signupcompose.utils.countryToPhonePrefix
-import com.akole.signupcompose.ui.CustomOutlinedTextField
+import com.akole.signupcompose.ui.common.CustomOutlinedTextField
 import com.akole.signupcompose.utils.transformation.PhoneNumberTransformation
 
 @Composable

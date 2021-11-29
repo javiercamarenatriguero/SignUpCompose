@@ -1,4 +1,4 @@
-package com.akole.signupcompose.ui.screens.signup
+package com.akole.signupcompose.ui.screens.signup.fields
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
@@ -10,7 +10,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.akole.signupcompose.R
-import com.akole.signupcompose.ui.CustomOutlinedTextField
+import com.akole.signupcompose.ui.common.CustomOutlinedTextField
 
 @Composable
 fun EmailTextField(

@@ -11,7 +11,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import com.akole.signupcompose.R
+import com.akole.signupcompose.ui.common.CustomDialog
+import com.akole.signupcompose.ui.screens.signup.fields.BirthDateTextField
+import com.akole.signupcompose.ui.screens.signup.fields.EmailTextField
+import com.akole.signupcompose.ui.screens.signup.fields.NameRow
+import com.akole.signupcompose.ui.screens.signup.fields.PasswordTextField
+import com.akole.signupcompose.ui.screens.signup.fields.PhoneTextField
+import com.akole.signupcompose.ui.screens.signup.fields.SignUpButton
 import com.akole.signupcompose.ui.theme.Shapes
 import com.google.accompanist.insets.navigationBarsWithImePadding
 
@@ -105,6 +113,28 @@ fun SignUpContent(
                     viewModel.on(SignUpViewModel.ViewEvent.SignUpButtonClick)
                 }
             )
+            if (viewModel.viewState.isSuccessDialogVisible) {
+                CustomDialog(
+                    title = stringResource(id = R.string.sign_up_success_dialog_title_text),
+                    doneButtonText = stringResource(id = R.string.sign_up_success_dialog_done_button_text),
+                    onDismissRequest = {
+                        viewModel.on(SignUpViewModel.ViewEvent.OnDialogCloseClicked)
+                    },
+                    editButtonText = stringResource(id = R.string.sign_up_success_dialog_edit_button_text),
+                    onEditButtonClick = {
+                        viewModel.on(SignUpViewModel.ViewEvent.OnDialogEditClicked)
+                    },
+                    content = {
+                        SuccessDialogContent(
+                            viewModel.viewState.firstName,
+                            viewModel.viewState.lastName,
+                            viewModel.viewState.country,
+                            viewModel.viewState.phoneNumber,
+                            viewModel.viewState.email,
+                        )
+                    }
+                )
+            }
         }
     }
 }

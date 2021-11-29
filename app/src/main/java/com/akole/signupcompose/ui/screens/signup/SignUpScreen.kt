@@ -11,7 +11,6 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.tooling.preview.Preview
 import com.akole.signupcompose.ui.screens.signup.SignUpViewModel.OneShotEvent
 import com.akole.signupcompose.ui.screens.signup.SignUpViewModel.ViewEvent
 import kotlinx.coroutines.flow.collect

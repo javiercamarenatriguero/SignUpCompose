@@ -5,7 +5,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.akole.signupcompose.model.User
 import com.akole.signupcompose.utils.isReadyToSignUp
 import com.akole.signupcompose.utils.isValidDate
 import com.akole.signupcompose.utils.isValidEmail
@@ -40,6 +39,8 @@ class SignUpViewModel: ViewModel() {
             ViewEvent.OnKeyboardDown -> emit(OneShotEvent.FocusDown)
             ViewEvent.OnKeyboardDone -> emit(OneShotEvent.HideKeyboard)
             ViewEvent.NavigateBack -> emit(OneShotEvent.ClosePage)
+            ViewEvent.OnDialogCloseClicked -> onSuccessDialogClose()
+            ViewEvent.OnDialogEditClicked -> updateState(isSuccessDialogVisible = false)
         }
     }
 
@@ -52,7 +53,8 @@ class SignUpViewModel: ViewModel() {
         email: String = viewState.email,
         password: String = viewState.password,
         isPasswordVisible: Boolean = viewState.isPasswordVisible,
-        isSignUpButtonClicked: Boolean = viewState.isSignUpButtonClicked
+        isSignUpButtonClicked: Boolean = viewState.isSignUpButtonClicked,
+        isSuccessDialogVisible: Boolean = viewState.isSuccessDialogVisible
     ) {
         viewState = ViewState(
             firstName = firstName,
@@ -63,7 +65,8 @@ class SignUpViewModel: ViewModel() {
             email = email,
             password = password,
             isPasswordVisible = isPasswordVisible,
-            isSignUpButtonClicked = isSignUpButtonClicked
+            isSignUpButtonClicked = isSignUpButtonClicked,
+            isSuccessDialogVisible = isSuccessDialogVisible
         )
     }
 
@@ -106,8 +109,13 @@ class SignUpViewModel: ViewModel() {
     private fun onSignUpButtonClick() {
         updateState(isSignUpButtonClicked = true)
         if (viewState.isReadyToSignUp()) {
-            emit(OneShotEvent.SignUpCompleted(viewState.toUser()))
+            updateState(isSuccessDialogVisible = true)
+            emit(OneShotEvent.HideKeyboard)
         }
+    }
+
+    private fun onSuccessDialogClose() {
+        viewState = ViewState()
     }
 
     private fun emit(event: OneShotEvent) {
@@ -119,25 +127,15 @@ class SignUpViewModel: ViewModel() {
     data class ViewState(
         val firstName: String = "",
         val lastName: String = "",
-        val country: String = "",
+        val country: String = "Spain",
         val phoneNumber: String = "",
         val birthdate: String = "",
         val email: String = "",
         val password: String = "",
         val isSignUpButtonClicked: Boolean = false,
-        val isPasswordVisible: Boolean = false
+        val isPasswordVisible: Boolean = false,
+        val isSuccessDialogVisible: Boolean = false
     )
-
-    private fun ViewState.toUser() =
-        User(
-            firstName = firstName,
-            lastName = lastName,
-            country = country,
-            phoneNumber = phoneNumber,
-            birthdate = birthdate,
-            email = email,
-            password = password
-        )
 
     sealed interface ViewEvent {
         data class FirstNameChange(val value: String) : ViewEvent
@@ -154,6 +152,8 @@ class SignUpViewModel: ViewModel() {
         object OnKeyboardNext : ViewEvent
         object OnKeyboardDown : ViewEvent
         object NavigateBack : ViewEvent
+        object OnDialogCloseClicked : ViewEvent
+        object OnDialogEditClicked : ViewEvent
     }
 
     sealed interface OneShotEvent {
@@ -163,7 +163,6 @@ class SignUpViewModel: ViewModel() {
         object FocusDown : OneShotEvent
         object OpenCountryModalSheet : OneShotEvent
         object HideCountryModalSheet : OneShotEvent
-        data class SignUpCompleted(val user: User) : OneShotEvent
     }
 
     companion object {

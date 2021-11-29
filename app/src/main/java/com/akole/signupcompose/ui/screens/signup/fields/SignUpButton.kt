@@ -1,4 +1,4 @@
-package com.akole.signupcompose.ui.screens.signup
+package com.akole.signupcompose.ui.screens.signup.fields
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
