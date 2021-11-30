@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="textfield_error_start_padding">15dp</dimen>
-    <dimen name="title_top_padding">50dp</dimen>
+    <dimen name="title_top_padding">5dp</dimen>
     <dimen name="sign_up_column_arrangement_space">20dp</dimen>
     <dimen name="sign_up_column_padding">30dp</dimen>
     <dimen name="name_row_space_by">10dp</dimen>
+    <dimen name="sign_up_button_padding">5dp</dimen>
+    <dimen name="custom_dialog_button_row_padding">10dp</dimen>
 </resources>

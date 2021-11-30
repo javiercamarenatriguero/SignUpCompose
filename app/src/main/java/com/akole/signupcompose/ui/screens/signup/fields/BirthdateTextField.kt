@@ -30,7 +30,7 @@ fun BirthDateTextField(
     ) {
         CustomOutlinedTextField(
             value = birthdate,
-            keyboardType = KeyboardType.Number,
+            keyboardType = KeyboardType.Phone,
             onKeyboardNext = onKeyboardNext,
             visualTransformation = DateTransformation(),
             onValueChange = onBirthdateChange,

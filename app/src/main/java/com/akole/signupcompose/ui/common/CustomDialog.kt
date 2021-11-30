@@ -15,22 +15,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.akole.signupcompose.R
 import com.akole.signupcompose.ui.theme.SignUpColor
 
 @Composable
 fun CustomDialog(
-    content: @Composable () -> Unit,
     onDismissRequest: () -> Unit,
     title: String? = null,
     isCancellable: Boolean = false,
     doneButtonText: String? = null,
     onDoneButtonClick: () -> Unit = onDismissRequest,
     editButtonText: String? = null,
-    onEditButtonClick: () -> Unit = onDismissRequest
+    onEditButtonClick: () -> Unit = onDismissRequest,
+    content: @Composable () -> Unit,
 ) {
     Dialog(
         onDismissRequest = onDismissRequest,
@@ -53,18 +58,20 @@ fun CustomDialog(
                 }
                 content()
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = dimensionResource(id = R.dimen.custom_dialog_button_row_padding)),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(20.dp)
                 ) {
                     doneButtonText?.let { text ->
-                        AlertDialogButton(
+                        CustomButton(
                             text = text,
                             onClick = onDoneButtonClick
                         )
                     }
                     editButtonText?.let { text ->
-                        AlertDialogButton(
+                        CustomButton(
                             text = text,
                             onClick = onEditButtonClick
                         )
@@ -90,16 +97,4 @@ private fun AlertDialogTitle(
             .fillMaxWidth()
             .padding(horizontal = 20.dp)
     )
-}
-
-@Composable
-private fun AlertDialogButton(
-    text: String,
-    onClick: () -> Unit = {},
-) {
-    Button(
-        onClick = onClick
-    ) {
-        Text(text = text)
-    }
 }

@@ -4,40 +4,39 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.akole.signupcompose.R
+import com.akole.signupcompose.ui.common.CustomButton
 import com.akole.signupcompose.ui.common.CustomDialog
 import com.akole.signupcompose.ui.screens.signup.fields.BirthDateTextField
 import com.akole.signupcompose.ui.screens.signup.fields.EmailTextField
 import com.akole.signupcompose.ui.screens.signup.fields.NameRow
 import com.akole.signupcompose.ui.screens.signup.fields.PasswordTextField
 import com.akole.signupcompose.ui.screens.signup.fields.PhoneTextField
-import com.akole.signupcompose.ui.screens.signup.fields.SignUpButton
-import com.akole.signupcompose.ui.theme.Shapes
 import com.google.accompanist.insets.navigationBarsWithImePadding
 
 @Composable
 fun SignUpContent(
-    viewModel: SignUpViewModel
+    viewModel: SignUpViewModel,
+    modifier: Modifier = Modifier
 ) {
     val scrollState = rememberScrollState()
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .navigationBarsWithImePadding()
             .verticalScroll(state = scrollState, reverseScrolling = true)
     ) {
         Column(
             modifier = Modifier
-                .padding(dimensionResource(id = R.dimen.sign_up_column_padding))
-                .clip(Shapes.medium),
+                .padding(dimensionResource(id = R.dimen.sign_up_column_padding)),
             verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.sign_up_column_arrangement_space))
         ) {
             TitleText()
@@ -108,7 +107,9 @@ fun SignUpContent(
                 },
                 isError = viewModel.isPasswordNotValid()
             )
-            SignUpButton(
+            CustomButton(
+                text = stringResource(id = R.string.sign_up_button_text),
+                modifier = Modifier.fillMaxWidth(),
                 onClick = {
                     viewModel.on(SignUpViewModel.ViewEvent.SignUpButtonClick)
                 }

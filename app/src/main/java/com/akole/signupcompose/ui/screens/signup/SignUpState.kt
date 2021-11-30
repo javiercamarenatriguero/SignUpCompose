@@ -1,9 +1,13 @@
 package com.akole.signupcompose.ui.screens.signup
 
+import androidx.compose.material.DrawerValue
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetState
 import androidx.compose.material.ModalBottomSheetValue
+import androidx.compose.material.ScaffoldState
+import androidx.compose.material.rememberDrawerState
 import androidx.compose.material.rememberModalBottomSheetState
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -21,11 +25,12 @@ import kotlinx.coroutines.launch
 @Composable
 fun rememberSignUpState(
     modalBottomSheetState: ModalBottomSheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden),
+    scaffoldState: ScaffoldState = rememberScaffoldState(rememberDrawerState(DrawerValue.Open)),
     focusManager: FocusManager = LocalFocusManager.current,
     keyboardController: SoftwareKeyboardController? = LocalSoftwareKeyboardController.current,
     coroutineScope: CoroutineScope = rememberCoroutineScope()
 ): SignUpState = remember(modalBottomSheetState, focusManager, keyboardController) {
-    SignUpState(modalBottomSheetState, focusManager, keyboardController, coroutineScope)
+    SignUpState(modalBottomSheetState, scaffoldState, focusManager, keyboardController, coroutineScope)
 }
 
 @ExperimentalComposeUiApi
@@ -33,6 +38,7 @@ fun rememberSignUpState(
 class SignUpState
  constructor(
      val modalBottomSheetState: ModalBottomSheetState,
+     val scaffoldState: ScaffoldState,
      private val focusManager: FocusManager,
      private val keyboardController: SoftwareKeyboardController?,
      private val coroutineScope: CoroutineScope

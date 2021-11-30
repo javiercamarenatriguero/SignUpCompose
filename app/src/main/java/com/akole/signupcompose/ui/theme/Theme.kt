@@ -24,7 +24,7 @@ private val LightColorPalette = lightColors(
 @Composable
 fun SignUpComposeTheme(
     @Suppress("UNUSED_PARAMETER") darkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable() () -> Unit
+    content: @Composable () -> Unit
 ) {
     MaterialTheme(
         colors = LightColorPalette,

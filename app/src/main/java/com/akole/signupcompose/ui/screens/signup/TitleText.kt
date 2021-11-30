@@ -19,7 +19,7 @@ fun TitleText() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = dimensionResource(id = R.dimen. title_top_padding)),
+            .padding(top = dimensionResource(id = R.dimen.title_top_padding)),
         contentAlignment = Alignment.Center
     ) {
         Text(
