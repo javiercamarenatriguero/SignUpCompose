@@ -4,6 +4,7 @@ Aplicación Android de registro de personas mediante formulario realizada 100% e
 Dicha aplicación se ha realizado en el contexto del curso Expert Compose y como participación en el Hackathlon de Diciembre 2021. 
 ## Características
 Sign Up App incluye las siguientes características:
+
 * Arquitectura de vistas MVI 
 * Campos de texto para diferentes tipos de datos
   * Nombre y apellidos (campos de textos sencillos)
@@ -24,6 +25,7 @@ Sign Up App incluye las siguientes características:
 ![Gestión Errores](https://bitbucket.org/javi_hetfield/signupcompose/raw/master/screenshots/error_layout.png)
 ![Modal Bottom](https://bitbucket.org/javi_hetfield/signupcompose/raw/master/screenshots/modal_layout.png)
 ![Diálogo de finalización](https://bitbucket.org/javi_hetfield/signupcompose/raw/master/screenshots/success_layout.png)
+
 
 ### External Libraries
  
