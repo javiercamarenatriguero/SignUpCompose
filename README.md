@@ -1,7 +1,7 @@
 # Sign Up Compose App
  
 Aplicación Android de registro de personas mediante formulario realizada 100% en Jetpack Compose.
-Dicha aplicación se ha realizado en el contexto del curso Expert Compose y como participación en el Hackathlon de Diciembre 2021. 
+Dicha aplicación se ha realizado en el contexto del curso Compose Expert y como participación en el Hackathlon de Diciembre 2021. 
 ## Características
 Sign Up App incluye las siguientes características:
 
