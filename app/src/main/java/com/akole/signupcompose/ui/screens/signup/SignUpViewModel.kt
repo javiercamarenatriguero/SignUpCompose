@@ -34,10 +34,10 @@ class SignUpViewModel: ViewModel() {
             is ViewEvent.BirthdateChange -> onBirthdateChange(birthdate = value)
             ViewEvent.PasswordSwitchClick -> updateState(isPasswordVisible = !viewState.isPasswordVisible)
             ViewEvent.CountryClick -> onCountryClick()
-            ViewEvent.SignUpButtonClick -> onSignUpButtonClick()
+            ViewEvent.SignUpButtonClick -> onSignUpDone()
             ViewEvent.OnKeyboardNext -> emit(OneShotEvent.FocusRight)
             ViewEvent.OnKeyboardDown -> emit(OneShotEvent.FocusDown)
-            ViewEvent.OnKeyboardDone -> emit(OneShotEvent.HideKeyboard)
+            ViewEvent.OnKeyboardDone -> onSignUpDone()
             ViewEvent.NavigateBack -> emit(OneShotEvent.ClosePage)
             ViewEvent.OnDialogCloseClicked -> onSuccessDialogClose()
             ViewEvent.OnDialogEditClicked -> updateState(isSuccessDialogVisible = false)
@@ -106,15 +106,16 @@ class SignUpViewModel: ViewModel() {
         if (phoneNumber.length <= MAX_PHONE_NUMBER_CHAR) updateState(phoneNumber = phoneNumber)
     }
 
-    private fun onSignUpButtonClick() {
+    private fun onSignUpDone() {
+        emit(OneShotEvent.HideKeyboard)
         updateState(isSignUpButtonClicked = true)
         if (viewState.isReadyToSignUp()) {
             updateState(isSuccessDialogVisible = true)
-            emit(OneShotEvent.HideKeyboard)
         }
     }
 
     private fun onSuccessDialogClose() {
+        emit(OneShotEvent.FocusClear)
         viewState = ViewState()
     }
 
@@ -161,6 +162,7 @@ class SignUpViewModel: ViewModel() {
         object HideKeyboard : OneShotEvent
         object FocusRight : OneShotEvent
         object FocusDown : OneShotEvent
+        object FocusClear : OneShotEvent
         object OpenCountryModalSheet : OneShotEvent
         object HideCountryModalSheet : OneShotEvent
     }

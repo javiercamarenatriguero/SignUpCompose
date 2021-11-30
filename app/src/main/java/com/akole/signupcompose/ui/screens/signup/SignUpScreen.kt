@@ -2,17 +2,11 @@ package com.akole.signupcompose.ui.screens.signup
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ModalBottomSheetLayout
-import androidx.compose.material.ModalBottomSheetState
-import androidx.compose.material.ModalBottomSheetValue
-import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.focus.FocusDirection
-import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import com.akole.signupcompose.ui.screens.signup.SignUpViewModel.OneShotEvent
 import com.akole.signupcompose.ui.screens.signup.SignUpViewModel.ViewEvent
@@ -24,10 +18,10 @@ import kotlinx.coroutines.flow.collect
 fun SignUpScreen(
     viewModel: SignUpViewModel
 ) {
-    val modalBottomSheetState: ModalBottomSheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
-    val focusManager = LocalFocusManager.current
+    val signUpState: SignUpState = rememberSignUpState()
+
     ModalBottomSheetLayout(
-        sheetState = modalBottomSheetState,
+        sheetState = signUpState.modalBottomSheetState,
         sheetContent = {
             CountryListModalSheetContent(
                 onItemClick = {
@@ -40,15 +34,15 @@ fun SignUpScreen(
         SignUpContent(viewModel = viewModel)
     }
 
-    val keyboardController = LocalSoftwareKeyboardController.current
     LaunchedEffect(viewModel.oneShotEvents) {
         viewModel.oneShotEvents.collect { event ->
             when (event) {
-                OneShotEvent.OpenCountryModalSheet -> modalBottomSheetState.show()
-                OneShotEvent.HideKeyboard -> keyboardController?.hide()
-                OneShotEvent.HideCountryModalSheet -> modalBottomSheetState.hide()
-                OneShotEvent.FocusRight -> focusManager.moveFocus(FocusDirection.Right)
-                OneShotEvent.FocusDown -> focusManager.moveFocus(FocusDirection.Down)
+                OneShotEvent.OpenCountryModalSheet -> signUpState.showModalSheet()
+                OneShotEvent.HideKeyboard -> signUpState.hideKeyboard()
+                OneShotEvent.HideCountryModalSheet -> signUpState.hideModalSheet()
+                OneShotEvent.FocusRight -> signUpState.moveFocus(FocusDirection.Right)
+                OneShotEvent.FocusDown -> signUpState.moveFocus(FocusDirection.Down)
+                OneShotEvent.FocusClear -> signUpState.clearFocus()
                 else -> {}
             }
         }
