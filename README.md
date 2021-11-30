@@ -21,16 +21,16 @@ Sign Up App incluye las siguientes características:
  
 ### Screenshots
 
-![Formulario](https://bitbucket.org/javi_hetfield/signupcompose/raw/master/screenshoots/initial_layout.png)
-![Gestión Errores](https://bitbucket.org/javi_hetfield/signupcompose/raw/master/screenshoots/error_layout.png)
-![Modal Bottom](https://bitbucket.org/javi_hetfield/signupcompose/raw/master/screenshoots/modal_layout.png)
-![Diálogo de finalización](https://bitbucket.org/javi_hetfield/signupcompose/raw/master/screenshoots/dialog_layout.png)
+![Formulario](https://bitbucket.org/javi_hetfield/signupcompose/src/master/screenshots/initial_layout.png)
+![Gestión Errores](https://bitbucket.org/javi_hetfield/signupcompose/src/master/screenshots/error_layout.png)
+![Modal Bottom](https://bitbucket.org/javi_hetfield/signupcompose/src/master/screenshots/modal_layout.png)
+![Diálogo de finalización](https://bitbucket.org/javi_hetfield/signupcompose/src/master/screenshots/dialog_layout.png)
 
 ### External Libraries
  
 * [Accompanist](https://github.com/google/accompanist): Librería complementaria para Jetpack Compose
  
-###Requirements
+### Requirements
 * Min. Android SDK: 21
 * Target Android SDK: 31
  
