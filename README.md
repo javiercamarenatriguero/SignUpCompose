@@ -20,8 +20,8 @@ Sign Up App incluye las siguientes características:
  
 ### Screenshots
 
-![Formulario](https://bitbucket.org/javi_hetfield/signupcompose/raw/master/screenshots/initial_layout.png){height=400 width=200}
-![Gestión Errores](https://bitbucket.org/javi_hetfield/signupcompose/raw/master/screenshots/error_layout.png =250x250)
+![Formulario](https://bitbucket.org/javi_hetfield/signupcompose/raw/master/screenshots/initial_layout.png)
+![Gestión Errores](https://bitbucket.org/javi_hetfield/signupcompose/raw/master/screenshots/error_layout.png)
 ![Modal Bottom](https://bitbucket.org/javi_hetfield/signupcompose/raw/master/screenshots/modal_layout.png)
 ![Diálogo de finalización](https://bitbucket.org/javi_hetfield/signupcompose/raw/master/screenshots/success_layout.png)
 
