@@ -1,4 +1,4 @@
-package com.akole.signupcompose.ui.screens.signup
+package com.akole.signupcompose
 
 import androidx.compose.material.DrawerValue
 import androidx.compose.material.ExperimentalMaterialApi
@@ -29,13 +29,13 @@ fun rememberSignUpState(
     focusManager: FocusManager = LocalFocusManager.current,
     keyboardController: SoftwareKeyboardController? = LocalSoftwareKeyboardController.current,
     coroutineScope: CoroutineScope = rememberCoroutineScope()
-): SignUpState = remember(modalBottomSheetState, focusManager, keyboardController) {
-    SignUpState(modalBottomSheetState, scaffoldState, focusManager, keyboardController, coroutineScope)
+): AppState = remember(modalBottomSheetState, focusManager, keyboardController) {
+    AppState(modalBottomSheetState, scaffoldState, focusManager, keyboardController, coroutineScope)
 }
 
 @ExperimentalComposeUiApi
 @ExperimentalMaterialApi
-class SignUpState
+class AppState
  constructor(
      val modalBottomSheetState: ModalBottomSheetState,
      val scaffoldState: ScaffoldState,

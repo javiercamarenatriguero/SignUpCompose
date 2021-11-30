@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.akole.signupcompose.AppState
 import com.akole.signupcompose.R
 import com.akole.signupcompose.ui.screens.signup.SignUpViewModel.OneShotEvent
 import com.akole.signupcompose.ui.screens.signup.SignUpViewModel.ViewEvent
@@ -24,12 +25,11 @@ import kotlinx.coroutines.flow.collect
 @ExperimentalComposeUiApi
 @Composable
 fun SignUpScreen(
+    appState: AppState,
     viewModel: SignUpViewModel
 ) {
-    val signUpState: SignUpState = rememberSignUpState()
-
     ModalBottomSheetLayout(
-        sheetState = signUpState.modalBottomSheetState,
+        sheetState = appState.modalBottomSheetState,
         sheetContent = {
             CountryListModalSheetContent(
                 onItemClick = {
@@ -40,7 +40,7 @@ fun SignUpScreen(
         sheetShape = RoundedCornerShape(20.dp)
     ) {
         Scaffold(
-            scaffoldState = signUpState.scaffoldState,
+            scaffoldState = appState.scaffoldState,
             topBar ={
                 TopAppBar(
                     title ={
@@ -63,12 +63,12 @@ fun SignUpScreen(
     LaunchedEffect(viewModel.oneShotEvents) {
         viewModel.oneShotEvents.collect { event ->
             when (event) {
-                OneShotEvent.OpenCountryModalSheet -> signUpState.showModalSheet()
-                OneShotEvent.HideKeyboard -> signUpState.hideKeyboard()
-                OneShotEvent.HideCountryModalSheet -> signUpState.hideModalSheet()
-                OneShotEvent.FocusRight -> signUpState.moveFocus(FocusDirection.Right)
-                OneShotEvent.FocusDown -> signUpState.moveFocus(FocusDirection.Down)
-                OneShotEvent.FocusClear -> signUpState.clearFocus()
+                OneShotEvent.OpenCountryModalSheet -> appState.showModalSheet()
+                OneShotEvent.HideKeyboard -> appState.hideKeyboard()
+                OneShotEvent.HideCountryModalSheet -> appState.hideModalSheet()
+                OneShotEvent.FocusRight -> appState.moveFocus(FocusDirection.Right)
+                OneShotEvent.FocusDown -> appState.moveFocus(FocusDirection.Down)
+                OneShotEvent.FocusClear -> appState.clearFocus()
                 else -> {}
             }
         }

@@ -32,7 +32,7 @@ fun SignUpContent(
         modifier = modifier
             .fillMaxSize()
             .navigationBarsWithImePadding()
-            .verticalScroll(state = scrollState, reverseScrolling = true)
+            .verticalScroll(state = scrollState)
     ) {
         Column(
             modifier = Modifier
