@@ -2,7 +2,6 @@
  
 Aplicación Android de registro de personas mediante formulario realizada 100% en Jetpack Compose.
 Dicha aplicación se ha realizado en el contexto del curso Expert Compose y como participación en el Hackathlon de Diciembre 2021. 
- 
 ## Características
 Sign Up App incluye las siguientes características:
 * Arquitectura de vistas MVI 
@@ -21,10 +20,10 @@ Sign Up App incluye las siguientes características:
  
 ### Screenshots
 
-![Formulario](https://bitbucket.org/javi_hetfield/signupcompose/src/master/screenshots/initial_layout.png)
-![Gestión Errores](https://bitbucket.org/javi_hetfield/signupcompose/src/master/screenshots/error_layout.png)
-![Modal Bottom](https://bitbucket.org/javi_hetfield/signupcompose/src/master/screenshots/modal_layout.png)
-![Diálogo de finalización](https://bitbucket.org/javi_hetfield/signupcompose/src/master/screenshots/dialog_layout.png)
+<img src="https://bitbucket.org/javi_hetfield/signupcompose/raw/master/screenshots/initial_layout.png" width="200" height="400">
+<img src="https://bitbucket.org/javi_hetfield/signupcompose/raw/master/screenshots/error_layout.png" width="200" height="400">
+<img src="https://bitbucket.org/javi_hetfield/signupcompose/raw/master/screenshots/modal_layout.png" width="200" height="400">
+<img src="https://bitbucket.org/javi_hetfield/signupcompose/raw/master/screenshots/success_layout.png" width="200" height="400">
 
 ### External Libraries
  
